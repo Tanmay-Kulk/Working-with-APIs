@@ -20,6 +20,8 @@ Real-time data can be messy at times, think of it like how some forms you fill o
 This section provides insights into flight operations through multiple perspectives. It examines airline performance by counting flights per carrier and calculating average delays, helping identify the most active airlines and their punctuality records. Delay analysis focuses on understanding timing patterns, calculating on-time performance metrics, and visualizing delay distributions. The code defines flights within 15 minutes of scheduled time as "on-time," providing practical performance indicators. Airport and aircraft analysis reveal popular destinations from Toronto Pearson Airport and commonly used aircraft models, offering insights into route preferences and fleet composition. The hourly pattern analysis shows peak travel times throughout the day.
 
 
+### Bonus <br/>
+In the end, this file of code also provides you with an example that if you only require the arrival data, how you can get and in that, I have labeled the steps you can follow to achieve the same with other parameters as well!
 
 
 
