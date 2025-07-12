@@ -2,32 +2,25 @@
 
 The idea behind creating this repository is to share a small program that I've done using an API and conducted some analysis.
 
-### Project Motivation <br/>
-I have used RapidAPI to work on this project. It is a good resource to learn about different kinds of available APIs; through this, you can get access to over 7-8 categories of APIs, including Travel, Cybersecurity, and many more. Being a planespotter, I picked up an API related to aviation that included data related to arrivals, departures, flight name, arrival airport, and many more that piqued my interest. To start things off, we got the responses in the form of a JSON file. The idea that I had in my mind was to turn this JSON output into a dataframe and then clean that dataframe and perform some analysis. 
+### About APIs <br/>
+Think of APIs (short form for Application Programming Interfaces) as messengers that help different computer programs talk to each other. Just like how you might ask a waiter to bring you food from the kitchen, APIs let your code ask other services for data and get it delivered back to you. For data analysis, APIs are incredibly useful because they give you access to fresh, real-time information without having to collect it yourself. Instead of manually gathering data from websites or databases, you can simply ask an API for what you need. Here's how it works: your program sends a request (like "give me today's flight information"), and the API responds with the data you asked for, usually in a format called JSON that computers can easily understand. This means you can always work with the most up-to-date information available.
 
 
-### Response generated from an API <br/>
-To give a quick glimpse of the output, this is how it looked. 
+### Project Overview <br/>
+This project demonstrates how to work with flight data APIs (in this case) to extract, process, and analyze real-time flight information. Using the AeroDataBox API through RapidAPI, we fetch comprehensive flight data from Toronto Pearson International Airport (YYZ) and perform exploratory data analysis. The analysis focuses on understanding flight patterns, airline performance, delay statistics, and operational insights that could be valuable for airport management, travelers, or aviation enthusiasts.
 
-<img width="1353" height="348" alt="image" src="https://github.com/user-attachments/assets/1433c8d1-8d1e-44b7-a411-3c07f3287908" />
+### Working of Code <br/>
+#### Data Integration and Setting up the environment for API integration <br/>
+The code starts by loading your API key from a CSV file - think of this like keeping your house key in a secure place rather than leaving it lying around. Then it asks the AeroDataBox API for flight data, specifying exactly what we want: which time period to look at, what types of flights to include, and how much detail we need. The API sends back a huge pile of flight information, everything from when flights are supposed to leave and arrive, which airlines they belong to, what type of planes they're using, and their schedules. This information comes in a format called JSON. So we convert it into a neat, organized table (DataFrame) that's much easier to work with.
 
-This is a type of nested dictionary where 'departures' is the key and the rest are records or values. An interesting thing about these records or values is that if you look closely, you see that 'departure' is a key and has values like scheduledTime, revisedTime etc., followed by 'arrival', 'airport etc.
+#### Data Cleaning and Pre-processing <br/>
+Real-time data can be messy at times, think of it like how some forms you fill out might have blank fields or incomplete information. This code tackles this by checking each column to see how much information is missing. If a column is missing more than 90% of its data, we throw it out since it's not useful for analysis. We also fix the date and time information so that we can properly understand when flights are scheduled. Think of it like converting "5 PM" into a format that lets us calculate how long flights take or figure out delays. The code also creates some new pieces of information in the form of new columns in the dataframe, like calculating exactly how long each flight should take, whether flights are running late, and what hour of the day flights typically depart.
 
-<img width="867" height="450" alt="image" src="https://github.com/user-attachments/assets/6bee993a-8342-4ff3-91c0-58be2b05a368" />
+#### Exploratory Analysis <br/>
+This section provides insights into flight operations through multiple perspectives. It examines airline performance by counting flights per carrier and calculating average delays, helping identify the most active airlines and their punctuality records. Delay analysis focuses on understanding timing patterns, calculating on-time performance metrics, and visualizing delay distributions. The code defines flights within 15 minutes of scheduled time as "on-time," providing practical performance indicators. Airport and aircraft analysis reveal popular destinations from Toronto Pearson Airport and commonly used aircraft models, offering insights into route preferences and fleet composition. The hourly pattern analysis shows peak travel times throughout the day.
 
-I've tried showing how it works in the above diagram, but if it's not clear, then to give a gist of it, the value is in the form of a list, and in each list, there is a dictionary which has key like 'departure', 'arrival', 'airport' etc. and those keys have values which are again in the form of a key-value pair making it a nested dictionary.
 
-### Analysis Procedure <br/>
-To begin our analysis, I used the get function to fetch the 'departures' data, and then with the help of *pandas.json_normalize()*, I transformed this JSON output into a pandas dataframe. Followed by understanding the shape and data types of the columns in the dataframe. The data that I gathered had missing values, which I dealt with the help of a function that helped me eliminate the columns where more than 90% of their data was missing, which meant that those columns wouldn't be very useful. 
 
-<img width="426" height="202" alt="image" src="https://github.com/user-attachments/assets/4f0f9471-cc2a-4f40-9616-723f4137f7d4" />
-
-The above image shows an output from the function that I ran.
-
-Now, after dealing with missing values, I changed the datatype of the columns that had date and time to the "datetime" datatype in Python. Then, performed some basic cleaning steps where I cleaned the column names and added a few columns that represented flight duration, delays for both the departure and arrival periods, Furthermore, I also added a column that extracted the hour from those columns that included "Time" in them. 
-
-### Four Types of Analysis <br/>
-I carried out 4 types of analysis with the available data, which tells us about the airline performances, delays in both departure and arrival, the top airports which had the highest traffic, and which aircraft model was most frequently used.
 
 
 
